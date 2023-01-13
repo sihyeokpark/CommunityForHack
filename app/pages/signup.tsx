@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react'
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { METHODS } from 'http'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,18 +13,15 @@ export default function Home() {
 
     const { username, password } = inputs
 
-    const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name } = e.target
         setInputs({
             ...inputs,
             [name]: value
         })
-        console.log(username)
-    }, [])
+    }
 
-    const onClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log(username, password)
+    const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         const res = await fetch(`/api/signup?username=${username}&password=${password}`, {
             method: 'POST',
             headers: {
@@ -35,8 +31,7 @@ export default function Home() {
         })
         const json = await res.json()
         console.log(json)
-        json.success ? alert('Success!') : alert('Failed!')
-    }, [])
+    }
 
     return (
         <>
