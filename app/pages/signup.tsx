@@ -22,15 +22,19 @@ export default function Home() {
     }
 
     const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const res = await fetch(`/api/signup?username=${username}&password=${password}`, {
+        const res = await fetch('/api/signup', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
-            
+            body: JSON.stringify(inputs)
         })
         const json = await res.json()
-        console.log(json)
+        if (json.success) {
+            alert('Signup Success!')
+        } else {
+            alert('Signup Failed!')
+        }
     }
 
     return (
