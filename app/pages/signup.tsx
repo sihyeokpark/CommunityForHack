@@ -2,19 +2,40 @@ import React, { useState, useCallback } from 'react'
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+import { METHODS } from 'http'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [inputs, setInputs] = useState({
+        username: '',
+        password: ''
+    })
 
-    const onUsernameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(e.target.value)
+    const { username, password } = inputs
+
+    const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
+        const { value, name } = e.target
+        setInputs({
+            ...inputs,
+            [name]: value
+        })
+        console.log(username)
     }, [])
 
-    const onPasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value)
+    const onClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log(username, password)
+        const res = await fetch(`/api/signup?username=${username}&password=${password}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            
+        })
+        const json = await res.json()
+        console.log(json)
+        json.success ? alert('Success!') : alert('Failed!')
     }, [])
 
     return (
@@ -47,10 +68,11 @@ export default function Home() {
             <h1 className={styles.welcome}>
                 Sign Up
             </h1>
+            <p className={inter.className}>INSERT INTO user VALUES (id, "{username}", "{password}")</p>
             <form>
-                <input className={inter.className} type='text' placeholder='username' id='username' value={username} onChange={onUsernameChange}></input>
-                <input className={inter.className} type='text' placeholder='password' id='password' value={password} onChange={onPasswordChange}></input>
-                <button type='submit' className={inter.className}>Sign Up</button>
+                <input className={inter.className} type='text' placeholder='username' onChange={onChange} name='username' value={username}></input>
+                <input className={inter.className} type='text' placeholder='password' onChange={onChange} name='password' value={password}></input>
+                <button type='submit' className={inter.className} onClick={onClick}>Sign Up</button>
             </form>
         </div>
         </>
