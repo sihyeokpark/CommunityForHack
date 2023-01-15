@@ -19,7 +19,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             return
         }
         const id = await db.get(`SELECT count(id) as count FROM user`)
-        db.run(`INSERT INTO user VALUES (${id.count+1}, "${body.username}", "${body.password}");`)
+        try {
+            db.run(`INSERT INTO user VALUES (${id.count+1}, "${body.username}", "${body.password}");`)
+        } catch(error) {
+            res.status(400).json({ message: '', error: 'error', success: false })
+            return
+        }
         res.status(200).json({ message: `Hello ${body.username}. Welecome to my site`, error: '', success: true })
     } else {
         res.status(404).json({ message: '', error: 'not exist url', success: false })

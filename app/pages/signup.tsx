@@ -14,10 +14,10 @@ export default function Home() {
     const { username, password } = inputs
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, name } = e.target
+        const { value, id } = e.target
         setInputs({
             ...inputs,
-            [name]: value
+            [id]: value
         })
     }
 
@@ -31,7 +31,7 @@ export default function Home() {
         })
         const json = await res.json()
         if (json.success) {
-            alert('Signup Success!')
+            location.href = '/'
         } else {
             alert('Signup Failed!')
         }
@@ -69,9 +69,9 @@ export default function Home() {
             </h1>
             <p className={inter.className}>INSERT INTO user VALUES (id, "{username}", "{password}")</p>
             <form>
-                <input className={inter.className} type='text' placeholder='username' onChange={onChange} name='username' value={username}></input>
-                <input className={inter.className} type='text' placeholder='password' onChange={onChange} name='password' value={password}></input>
-                <button type='submit' className={inter.className} onClick={onClick}>Sign Up</button>
+                <input className={inter.className} placeholder='username' onChange={onChange} id='username' value={username}></input>
+                <input className={inter.className} placeholder='password' onChange={onChange} id='password' value={password}></input>
+                <button className={inter.className} onClick={onClick}>Sign Up</button>
             </form>
         </div>
         </>
