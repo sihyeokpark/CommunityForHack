@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
@@ -6,6 +7,7 @@ import styles from '../styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const router = useRouter()
     const [inputs, setInputs] = useState({
         username: '',
         password: ''
@@ -28,10 +30,10 @@ export default function Home() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(inputs)
-        })
-        const json = await res.json()
-        if (json.success) {
-            location.href = '/'
+        }).then(res => res.json())
+        if (res.success) {
+            router.replace('/hello')
+            alert('Signup Success!')
         } else {
             alert('Signup Failed!')
         }
