@@ -21,7 +21,7 @@ export default function Home() {
                 </p>
                 <div>
                     <a
-                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                    href="https://exon.kr"
                     target="_blank"
                     rel="noopener noreferrer"
                     >
@@ -53,9 +53,8 @@ export default function Home() {
                 </a>
 
                 <a
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                    href="/login"
                     className={styles.card}
-                    target="_blank"
                     rel="noopener noreferrer"
                 >
                     <h2 className={inter.className}>
@@ -69,7 +68,6 @@ export default function Home() {
                 <a
                     href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                     className={styles.card}
-                    target="_blank"
                     rel="noopener noreferrer"
                 >
                     <h2 className={inter.className}>
@@ -83,7 +81,6 @@ export default function Home() {
                 <a
                     href="https://exon.kr"
                     className={styles.card}
-                    target="_blank"
                     rel="noopener noreferrer"
                 >
                     <h2 className={inter.className}>
