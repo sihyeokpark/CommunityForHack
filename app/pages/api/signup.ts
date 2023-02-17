@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { getDb } from '../tools/db'
+import { getDb } from './tools/db'
 
 type Data = {
     message: string
